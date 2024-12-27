@@ -82,4 +82,4 @@ License: MIT License
 
 Social Links 🌐
 
-Discord: [[Your Discord Server Link](https://discord.gg/GYTSh7rUr7)]
+Discord: [[GodArgon](https://discord.gg/GYTSh7rUr7)]
