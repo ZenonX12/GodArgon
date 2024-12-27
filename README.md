@@ -1,82 +1,34 @@
-# **GodArgon Bot**
+@everyone
 
-**GodArgon** is a powerful and destructive Discord bot designed to take control of servers by changing server names, deleting channels, and sending spam messages. It can be used for educational purposes or testing but can be dangerous if deployed carelessly. Please use it responsibly!
+🚨 **[UPDATE] - GodArgon Bot v1.0.0** 🚨
+
+⚡️ **New Features & Improvements** ⚡️  
+- **Nuking Power**: More channels are now deleted and created (up to 50 channels) for maximum chaos!
+- **Faster Spam**: Bot now sends 20 messages per channel with a faster delay (50ms) for rapid destruction.
+- **Server Name Updates**: Server names are now more ominous and impactful, including **GODARGON TERMINATION MODE** and **GODARGON END OF DAYS**.
+- **Improved Console Output**: Console logs are styled in **Neon Blue** for better visibility.
+
+🔥 **What’s Changed?**  
+- The **GodArgon Bot** now has enhanced control over server destruction:  
+    - Randomly changes the server's name.
+    - Deletes all existing channels.
+    - Creates **50 new channels** with dark, destructive names.  
+    - Sends a barrage of **aggressive spam messages** across the server.
+
+💬 **Command to Trigger GodArgon**:  
+`!god [option]`  
+Where the option corresponds to the server name you want to use for the destruction:  
+- `!god 1` -> **GODARGON TERMINATION MODE**  
+- `!god 2` -> **GODARGON CHAOS STATE**  
+- `!god 3` -> **GODARGON FINAL STAGE**  
+- `!god 4` -> **GODARGON END OF DAYS**
+
+⚠️ **Warning**:  
+The **GodArgon Bot** is highly destructive and should only be used in **testing environments** or for **educational purposes**.  
+Misuse of this bot can result in server bans and other consequences.
+
+🎮 **Stay tuned for future updates!**
+
+If you encounter issues or need support, reach out to **@GodArgon**.
 
 ---
-
-## **Key Features:**
-
-- **Channel Creation**: Automatically creates multiple channels with dark, chaotic names.
-- **Server Name Change**: Randomly changes the server name to something ominous.
-- **Spam Messages**: Sends aggressive, chaotic messages to newly created channels.
-- **Console Output**: Console logs are styled with neon blue for better visibility.
-- **Customizable**: Easily adjust settings like the bot’s prefix, token, and other parameters.
-
----
-
-## **Installation:**
-
-### 1. Clone the Repository:
-```bash
-git clone https://github.com/yourusername/godargon-bot.git
-cd godargon-bot
-```
-2. Install Dependencies:
-Ensure you have Node.js installed (version 16 or above recommended).
-
-Run the following command to install required dependencies:
-
-bash
-Copy code
-npm install
-3. Set Up the Bot:
-Create a new bot on the Discord Developer Portal.
-Copy the bot token.
-Open the config.js (or similar) file and paste your bot token into the godArgonToken field.
-4. Run the Bot:
-Once everything is set up, you can start the bot by running:
-
-bash
-Copy code
-node index.js
-How It Works:
-Command Prefix:
-The bot listens for commands that start with !. The primary command is !god, which triggers the following actions:
-
-Changes the server name to a randomly chosen name from the godArgonServerNames list.
-Deletes all existing channels in the server.
-Creates new channels with random names from the godArgonChannelNames array.
-Spam Messages:
-Once new channels are created, the bot will send aggressive messages to each channel, such as:
-
-Warnings and system malfunction alerts.
-20 messages will be sent per channel with a 50ms delay between each.
-Commands:
-!god [option]
-Changes the server's name, deletes all channels, and creates new ones based on the option.
-
-Options:
-!god 1 - Changes the server name to "GODARGON TERMINATION MODE" and performs destructive actions.
-!god 2 - Changes the server name to "GODARGON CHAOS STATE" and performs destructive actions.
-!god 3 - Changes the server name to "GODARGON FINAL STAGE" and performs destructive actions.
-!god 4 - Changes the server name to "GODARGON END OF DAYS" and performs destructive actions.
-If no option is provided, it defaults to the first server name.
-
-Important Notes:
-Permissions: The bot requires administrator permissions to delete channels and send messages in the server. Make sure it has full access.
-Destructive Nature: The bot performs destructive actions such as deleting channels and sending aggressive messages. Use with caution. Misuse can lead to Discord account/server bans.
-Bot Token: Don’t forget to paste your bot's token into the godArgonToken field.
-Customization:
-You can modify several aspects of the bot, including:
-
-Prefix: Change the bot’s command prefix from ! to another character.
-Channel Names: Edit the list of channel names in godArgonChannelNames.
-Server Names: Customize the list of server names in godArgonServerNames.
-Spam Messages: Modify the spam messages in the godArgonSpamMessages array.
-Disclaimer:
-This bot is meant for educational purposes or testing only. Using it recklessly on a server could result in bans or violations of Discord’s Terms of Service. Use responsibly.
-
-License:
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-
